@@ -21,12 +21,12 @@ function ShowHidde() {
     }
 
     const addImg = ()=>{
-        
+    
         const cards = [];
 
         for (let i = 0; i < img; i++) {
-            console.log(`esta es la variable i de el ciclo for${i}`)
-            console.log(`esta es la variable img ${img}`)
+
+            img - 1 === i && console.log(`esta es la variable i de el ciclo for${i}`)
             cards.push(
                 <Cads
                 key={i}
@@ -35,7 +35,10 @@ function ShowHidde() {
                 image="https://depor.com/resizer/25quKBxP8Ti7cjCcmnR887FHER0=/1200x1200/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/DAYT2F5NUNB7VPAFKUPHNDXVQA.jpg"
                 />
             );
+
         }
+
+        console.log(`esta es la variable img ${img}`)
         return cards;
 
     }

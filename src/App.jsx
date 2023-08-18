@@ -10,10 +10,6 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <h1>Proyecto de React</h1>
-      <section className='Cards-Conteiner'>
-        {sajansList}
-      </section> */}
       <section className='state-Container'>
         <ShowHidde/>
       </section>
