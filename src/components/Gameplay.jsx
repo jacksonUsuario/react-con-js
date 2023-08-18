@@ -1,50 +1,127 @@
-import React, { useState } from 'react'
-import '../styles/gameplay.css'
+import React, { useState } from "react";
+import "../styles/gameplay.css";
 
 function Gameplay() {
-  return (
-    <div className='gameplay'>
-        <div className="container-cards">
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-        </div>
-    </div>
-  )
-}
+  const [isClickCard, setClickCard] = useState("");
+  const [isClickCardTwo, setClickCardTwo] = useState("");
 
-export default Gameplay
-
-
-
-function Card() {
-
-  const [isFlipped, setFlipped] = useState(false)
-
-
-  const handleCardClick = () =>{
-    setFlipped(!isFlipped)
+  function validedCard(id, index) {
+    if (isClickCard == "") {
+      setClickCard(id);
+    } else if (isClickCard != "" && isClickCard === id ) {
+      if (id == isClickCard) {
+        let copyLisCard = [...isClickCard];
+        const listValid = lisCard.map((cards) => {
+          if (cards.id === id) {
+            return {
+              ...cards,
+              isfind: true,
+            };
+          }
+          return  cards
+        }
+        );
+        console.log(listValid);
+        setLisCard([...listValid])
+        setClickCard("");
+        /* [{
+        "id": "uno",
+        "src": "sa",
+        "alt": "uno",
+        "isfind": false }, 
+        {
+        "id": "uno",
+        "src": "sa",
+        "alt": "uno",
+        "isfind": false
+    }
+]
+        */
+      }
+    }else{
+      console.log("fallo");
+      setClickCard("")
+    }
   }
 
-  return(
-    <figure className={`carta-padre ${isFlipped ? 'flipped' : ''}`} onClick={handleCardClick}>
-      <div style={{
-        width:"100%",
-        height:"100%",
-        backgroundColor: isFlipped ? "red":"blue"
-      }}>{isFlipped? "Back" :"Front"} </div>
-{/*       
-      <div className="front">Front</div>
-      <div className="back">Back</div> */}
+  const [lisCard, setLisCard] = useState([
+    {
+      id: "uno",
+      src: "sa",
+      alt: "uno",
+      isfind: false,
+    },
+    {
+      id: "uno",
+      src: "sa",
+      alt: "uno",
+      isfind: false,
+    },
+    {
+      id: "dos",
+      src: "sa",
+      alt: "dos",
+      isfind: false,
+    },
+    {
+      id: "dos",
+      src: "sa",
+      alt: "dos",
+      isfind: false,
+    },
+  ]);
+
+  return (
+    <div className="gameplay">
+      <div className="container-cards">
+        {/* <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/>
+            <Card/> */}
+        {lisCard.map((card, index) => {
+          return (
+            <Card
+              card={card}
+              index={index}
+              key={index}
+              validedCard={validedCard}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+export default Gameplay;
+
+function Card(props) {
+  // console.log(props);
+  const [isFlipped, setFlipped] = useState(false);
+  // const [sepuese, setSepuede] = useState(false)
+
+  const handleCardClick = () => {
+    !props.card.isfind && setFlipped(!isFlipped);
+  };
+
+  return (
+    <figure
+      className={`carta-padre ${isFlipped ? "flipped" : ""}`}
+      onClick={() => {
+        handleCardClick();
+        props.validedCard(props.card.id, props.index);
+      }}
+    >
+      <div className="front">{props.card.isfind? "Ya le diste":"No"} {props.index+1}</div>
+      <div className="back"> {props.card.isfind ? "Ya le diste":"no"} {props.index+1} </div>
     </figure>
-  )
+  );
 }

@@ -37,7 +37,7 @@
   }
   
   .flipped {
-    transform: rotateY(360deg);
+    transform: rotateY(180deg);
   }
   
   .front,
