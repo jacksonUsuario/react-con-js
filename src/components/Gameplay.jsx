@@ -10,6 +10,7 @@ function Gameplay() {
       setClickCard(id);
     } else if (isClickCard != "" && isClickCard === id ) {
       if (id == isClickCard) {
+        alert('carta correcta')
         let copyLisCard = [...isClickCard];
         const listValid = lisCard.map((cards) => {
           if (cards.id === id) {
@@ -39,37 +40,105 @@ function Gameplay() {
         */
       }
     }else{
+      alert('incorrecta')
       console.log("fallo");
       setClickCard("")
     }
   }
 
+
+  // let carta1 = null;
+  // let carta2 = null;
+  // let cartasDestapadas = 0;
+  // function validedCard(params) {
+
+  //   cartasDestapadas++;
+
+  //   if (cartasDestapadas === 1) {
+  //     carta1 = lisCard;
+  //   }else if(cartasDestapadas ===2){
+  //     carta2 = lisCard;
+  //   }
+  // }
+
   const [lisCard, setLisCard] = useState([
     {
       id: "uno",
-      src: "sa",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
       alt: "uno",
       isfind: false,
     },
     {
       id: "uno",
-      src: "sa",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
       alt: "uno",
       isfind: false,
     },
     {
       id: "dos",
-      src: "sa",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
       alt: "dos",
       isfind: false,
     },
     {
       id: "dos",
-      src: "sa",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
       alt: "dos",
       isfind: false,
     },
+    {
+      id: "tres",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "tres",
+      isfind: false,
+    },
+    {
+      id: "tres",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "tres",
+      isfind: false,
+    },
+    {
+      id: "cuatro",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "cuatro",
+      isfind: false,
+    },
+    {
+      id: "cuatro",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "cuatro",
+      isfind: false,
+    },
+    {
+      id: "cinco",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "cinco",
+      isfind: false,
+    },
+    {
+      id: "cinco",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "cinco",
+      isfind: false,
+    },
+    {
+      id: "seis",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "seis",
+      isfind: false,
+    },
+    {
+      id: "seis",
+      src: new URL("../assets/img/cartas/eye.png", import.meta.url).toString(),
+      alt: "seis",
+      isfind: false,
+    },
   ]);
+
+  // lisCard.forEach(card =>{
+    
+  // })
 
   return (
     <div className="gameplay">
@@ -116,12 +185,19 @@ function Card(props) {
     <figure
       className={`carta-padre ${isFlipped ? "flipped" : ""}`}
       onClick={() => {
-        handleCardClick();
+        
         props.validedCard(props.card.id, props.index);
       }}
     >
-      <div className="front">{props.card.isfind? "Ya le diste":"No"} {props.index+1}</div>
-      <div className="back"> {props.card.isfind ? "Ya le diste":"no"} {props.index+1} </div>
+      <div className="front" onClick={()=>{
+        handleCardClick();
+      }}>{props.card.isfind? "Ya le diste":"No"} {props.index+1}</div>
+      <div className="back"> 
+        <img src={props.card.src} alt={props.card.alt} />
+      </div>
     </figure>
   );
 }
+
+
+// {props.card.isfind ? "Ya le diste":"no"} {props.index+1} 
