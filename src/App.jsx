@@ -1,19 +1,77 @@
-import './App.css'
-import Cads from './components/Cads'
-import {sajans} from './data';
-import ShowHidde from './components/ShowHidde';
+import { useState } from "react"
+
+const TURNS ={
+  X: 'x',
+  O: 'o'
+}
+
+const Square = ({children, isSelected,updateBoard, index}) =>{
+
+  const clasName = `square ${isSelected ? 'is-selected' : '' }`
+
+  const handleClick = ()=>{
+    updateBoard()
+  }
+  return(
+    <div onClick={handleClick} className={clasName}>
+      {children}
+    </div>
+  )
+}
 
 function App() {
-  const sajansList = sajans.map(sjj =>{
-    return <Cads title={sjj.name} description={sjj.description} image={sjj.image}/>
-  })
+  const [board, setBoard] = useState(Array(9).fill(null))
 
-  return (
-    <div className='App'>
-      <section className='state-Container'>
-        <ShowHidde/>
+  const [turn, setTurn] = useState(TURNS.X)
+
+  const updateBoard = (index)=>{
+    const newBoard = [...board];
+    newBoard[index] = turn
+    setBoard(newBoard)
+
+    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
+    setTurn(newTurn)
+  }
+
+  return(
+    <main className="board">
+
+      <h1>tic tac toe</h1>
+
+      <section className="game">
+        {
+
+          board.map((_, index) =>{
+
+            return(
+
+              <Square 
+              index={index}
+              key={index}
+              updateBoard={updateBoard}
+              >
+              {board[index]}
+              </Square>
+              
+            )
+          })
+
+        }
       </section>
-    </div>
+
+      <section className="turn">
+
+        <Square isSelected={turn === TURNS.X}>
+          {TURNS.X}
+        </Square>
+
+        <Square isSelected={turn === TURNS.O}>
+          {TURNS.O}
+        </Square>
+
+      </section>
+
+    </main>
   )
 }
 

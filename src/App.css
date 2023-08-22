@@ -4,23 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
-h1{
-  color: white;
-}
+
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
-  transition: filter 300ms;
-}
-.Cards-Conteiner{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.state-Container{
-  margin-top: 20px;
 }
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
